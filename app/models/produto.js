@@ -12,9 +12,11 @@ var Schema = mongoose.Schema;
  */
 
 var ProdutoSchema = new Schema({
-    nome: String,
-    preco: Number,
-    descricao: String,
+    firstname: String,
+    lastname: String,
+    nickname: String,
+    address: String,
+    bio: String,
 });
 
 module.exports = ProdutoSchema;

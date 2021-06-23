@@ -22,6 +22,7 @@ router.get("/", function (req, res) {
 // app.use("/api", router); 
 // var padrao = mongoose.model("Produtos", schema);
 var padrao = mongoose.model("Produtos", ProdutoSchema);
+// concat(item.artwork);
 // let people = ["geddy", "neil", "alex"];
 
 router
@@ -32,9 +33,11 @@ router
         var produto = new padrao();
 
         //Aqui vamos setar os campos do produto (via request):
-        produto.name = "req.body.nome";
-        produto.preco = 100;
-        produto.descricao = "req.body.descricao";
+        produto.firstname = 'req.body.firstname';
+        produto.lastname = 'req.body.lastname';
+        produto.nickname = 'req.body.nickname';
+        produto.address = 'req.body.address';
+        produto.bio = 'req.body.bio';
         // res.render("../../views/pages/index");
 
         produto.save(function (error) {
@@ -82,9 +85,11 @@ router
             if (error) res.send("Id do Produto não encontrado....: " + error);
 
             //Segundo:
-            produto.nome = req.body.nome;
-            produto.preco = req.body.preco;
-            produto.descricao = req.body.descricao;
+            produto.firstname = req.body.firstname;
+            produto.lastname = req.body.lastname;
+            produto.nickname = req.body.nickname;
+            produto.address = req.body.address;
+            produto.bio = req.body.bio;
 
             //Terceiro: Agora que já atualizamos os dados, vamos salvar as propriedades:
             produto.save(function (error) {
