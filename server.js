@@ -4,6 +4,7 @@
 
 var mongoose = require('mongoose');
 var express = require('express');
+var myScript = require('./app/public/js/post');
 var app = express();
 mongoose.Promise = global.Promise;
 
@@ -20,6 +21,7 @@ connection.once("open", function () {
     console.log("MongoDB database conexão estabelecida com sucesso!");
 });
 
+var res = express.Router();
 
 //Configuracao da varial app para usar o 'bodyParser'
 
@@ -28,8 +30,16 @@ var port = process.env.port || 8000;
 
 //Iniciando a aplicacao
 app.set("view engine", "ejs");
+app.use(express.static("app/public"));
 app.get("/", function (req, res) {
-    res.render("pages/index", {title: 'Forms', subtitle: 'Preencha corretamente os campos abaixo'});
+    res.render("pages/index", {
+        title: "Forms",
+        subtitle: "Preencha corretamente os campos abaixo",
+        utils: myScript,
+    });
+    // res.render("template", {
+        
+    // }); // you forgot a ')' here 
 });
 // app.set("views", "./views");
 app.use("/api", require("./app/router/router"));
