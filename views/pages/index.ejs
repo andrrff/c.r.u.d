@@ -13,25 +13,37 @@
     <div class="jumbotron">
         <h1><%= title %></h1>
         <p><%= subtitle %></p>
-        <form>
+        <form name='form' action='/' method="data" id="form">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <label for="exampleInputName1" class="form-label">Name</label>
+                <input type="name" name='firstname' class="first-name form-control" id="exampleInputName1" aria-describedby="nameHelp">
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="exampleInputLastname1" class="form-label">Lastname</label>
+                <input type="lastname" name='lastname' class="last-name form-control" id="exampleInputLastname1">
             </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <div class="mb-3">
+                <label for="exampleInputNickname1" class="form-label">Nickname</label>
+                <input type="nickname" name='username' class="nickname form-control" id="exampleInputNickname1">
+                <div id="nameHelp" class="form-text">máx. 30 caracteres</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputAddress1" class="form-label">Address</label>
+                <input type="address" name='address' class="address form-control" id="exampleInputAddress1">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputBio1" class="form-label">Bio</label>
+                <textarea class="bio form-control" name='bio' aria-label="With textarea"></textarea>
+                <div id="nameHelp" class="form-text">máx. 100 caracteres</div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         
     </div>
+    <%= utils.common1() %>
+    
 </main>
+
 
 <footer>
     <%- include ../partials/footer %>
