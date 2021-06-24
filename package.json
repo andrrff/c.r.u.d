@@ -2,9 +2,9 @@
     "name": "crud-test-hivelabs",
     "version": "1.0.0",
     "description": "Uma aplicação usando API RESTful + Node + MongoDB + Express",
-    "main": "server.js",
+    "main": "./server.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "nodemon -e css,ejs,js,json --watch app"
     },
     "repository": {
         "type": "git",
