@@ -29,6 +29,7 @@ router.route("/").post((req, res) => {
     var alert = Boolean;
     var block = Boolean;
     var currentdate = new Date();
+    var errorBool = false;
     var datetime =
         currentdate.getDate() +
         "/" +
@@ -57,22 +58,45 @@ router.route("/").post((req, res) => {
                 error: error
             });
 
-        produtos.forEach((element) => {
-            if (element.nickname != produto.nickname) {
-                notificacao = "Cadastro efeutuado com sucesso 😉!";
-                tipoAlert = "alert-success";
-                svg = "#check-circle-fill";
-                alert = true;
-                block = false;
-            } else {
-                notificacao = "Este nickname ja existe 😢!";
-                tipoAlert = "alert-danger";
-                svg = "#exclamation-triangle-fill";
-                alert = true;
-                block = true;
-            }
+        if(produtos[0] != undefined)
+        {
+            produtos.forEach((element) => {
+            if (
+                element.nickname == produto.nickname ||
+                produto.bio.length > 100 ||
+                produto.nickname.length > 30
+            )
+                errorBool = true;
         });
-        if (!block) {
+            if(!errorBool){
+                produto.save((error) => {
+                    if (error)
+                        res.send(
+                            "Erro ao tentar salvar o Produto....: " + error
+                        );
+
+                    res.render("pages/index", {
+                        title: "Forms",
+                        subtitle: "Preencha corretamente os campos abaixo",
+                        notificacao: "Cadastro efeutuado com sucesso 😉!",
+                        tipoAlert: "alert-success",
+                        svg: "#check-circle-fill",
+                        alert: true,
+                    });
+                });
+            } else {
+                res.render("pages/index", {
+                    title: "Forms",
+                    subtitle: "Preencha corretamente os campos abaixo",
+                    notificacao:
+                        "Ocorreu um erro no cadastro 😢!\n Possiveis causas:\n nickname já exitente;\n nickname muito grande; \nBio muito grande",
+                    tipoAlert: "alert-danger",
+                    svg: "#exclamation-triangle-fill",
+                    alert: true,
+                });
+            }
+        }
+        else{
             produto.save((error) => {
                 if (error)
                     res.send("Erro ao tentar salvar o Produto....: " + error);
@@ -80,22 +104,14 @@ router.route("/").post((req, res) => {
                 res.render("pages/index", {
                     title: "Forms",
                     subtitle: "Preencha corretamente os campos abaixo",
-                    notificacao: notificacao,
-                    tipoAlert: tipoAlert,
-                    svg: svg,
-                    alert: alert,
+                    notificacao: "Cadastro efeutuado com sucesso 😉!",
+                    tipoAlert: "alert-success",
+                    svg: "#check-circle-fill",
+                    alert: true
                 });
             });
-        } else {
-            res.render("pages/index", {
-                title: "Forms",
-                subtitle: "Preencha corretamente os campos abaixo",
-                notificacao: notificacao,
-                tipoAlert: tipoAlert,
-                svg: svg,
-                alert: alert,
-            });
         }
+        
     });
 });
 

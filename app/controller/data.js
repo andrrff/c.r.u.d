@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const { query } = require("../models/produto");
 mongoose.Promise = global.Promise;
 var router = express.Router();
 
@@ -36,7 +37,7 @@ router
 
     // 2) Método: Selecionar Todos Produtos (acessar em: GET http://localhost:8000/data)
     .get((_req, res) => {
-        padrao.find(function (error, produtos) {
+        padrao.find((error, produtos) => {
             if (error)
                 res.render("pages/error", {
                     title: "Error",
@@ -46,6 +47,25 @@ router
 
             res.render("pages/data", {
                 title: "Data",
+                nicknameResult:
+                    "__________________________________________________________________",
+                data: produtos,
+            });
+        });
+    });
+    router.route("/search?:nickname")
+    .get((req, res) => {
+        padrao.find((error, produtos) => {
+            if (error)
+                res.render("pages/error", {
+                    title: "Error",
+                    subtitle: "Infelizmente algo inesperado ocorreu",
+                    error: error,
+                });
+
+            res.render("pages/data", {
+                title: "Results",
+                nicknameResult: req.query.nickname,
                 data: produtos,
             });
         });
