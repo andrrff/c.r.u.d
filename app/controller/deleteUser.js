@@ -25,8 +25,8 @@ router
                     });
 
                 router.route('/');
-                res.render('pages/delete',
-                {title: "Item deletado"})
+                res.render('pages/actionPage',
+                {title: "Item deletado 🧺"})
             }
         );
     });
