@@ -24,6 +24,7 @@ app.set("view engine", "ejs");
 app.use(express.static("app/public"));
 app.use(methodOverride("_method"));
 app.use("/", require("./app/controller/home"));
+app.use("/doc", require("./app/controller/doc"));
 app.use("/data", require("./app/controller/data"));
 app.use("/", require("./app/controller/deleteUser"));
 app.use("/", require("./app/controller/updateUser"));

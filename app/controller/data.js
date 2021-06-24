@@ -36,7 +36,7 @@ router
 
     // 2) Método: Selecionar Todos Produtos (acessar em: GET http://localhost:8000/data)
     .get((_req, res) => {
-        padrao.find(function (error, produtos) {
+        padrao.find((error, produtos) => {
             if (error)
                 res.render("pages/error", {
                     title: "Error",
@@ -46,9 +46,25 @@ router
 
             res.render("pages/data", {
                 title: "Data",
+                nicknameResult: "a",
                 data: produtos,
             });
         });
     });
+    // router.route("/search/:query?").get((req, res) => {
+    //     padrao.find((error, produtos) => {
+    //         if (error)
+    //             res.render("pages/error", {
+    //                 title: "Error",
+    //                 subtitle: "Infelizmente algo inesperado ocorreu",
+    //                 error: error,
+    //             });
+    //         res.render("pages/data", {
+    //             title: "Data",
+    //             nicknameResult: res.params.query,
+    //             data: produtos,
+    //         });
+    //     });
+    // });
 
     module.exports = router;

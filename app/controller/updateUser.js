@@ -35,6 +35,16 @@ router
 router
     .route("/data/:produto_id/mode_edit")
     .get((req, res) => {
+        padrao.find((error, produtos) => {
+            if (error)
+                res.render("pages/error", {
+                    title: "Error",
+                    subtitle: "Infelizmente algo inesperado ocorreu",
+                    error: error,
+                });
+
+
+        });
         //Função para poder Selecionar um determinado produto por ID - irá verificar se caso não encontrar um detemrinado
         //produto pelo id... retorna uma mensagem de error:
         padrao.findById(req.params.produto_id, function (error, produto) {

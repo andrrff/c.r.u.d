@@ -57,15 +57,22 @@ router.route("/").post((req, res) => {
                 error: error
             });
 
-        produtos.forEach((element) => {
-            if (element.nickname != produto.nickname) {
+        if(produtos[0] != undefined)
+        {
+            produtos.forEach((element) => {
+            if (
+                element.nickname != produto.nickname &&
+                produto.bio.length <= 100 &&
+                produto.nickname.length <= 30
+            ) {
                 notificacao = "Cadastro efeutuado com sucesso 😉!";
                 tipoAlert = "alert-success";
                 svg = "#check-circle-fill";
                 alert = true;
                 block = false;
             } else {
-                notificacao = "Este nickname ja existe 😢!";
+                notificacao =
+                    "Ocorreu um erro no cadastro 😢!\n Possiveis causas:\n nickname já exitente;\n nickname muito grande; \nBio muito grande";
                 tipoAlert = "alert-danger";
                 svg = "#exclamation-triangle-fill";
                 alert = true;
@@ -95,7 +102,24 @@ router.route("/").post((req, res) => {
                 svg: svg,
                 alert: alert,
             });
+        }    
         }
+        else{
+            produto.save((error) => {
+                if (error)
+                    res.send("Erro ao tentar salvar o Produto....: " + error);
+
+                res.render("pages/index", {
+                    title: "Forms",
+                    subtitle: "Preencha corretamente os campos abaixo",
+                    notificacao: "Cadastro efeutuado com sucesso 😉!",
+                    tipoAlert: "alert-success",
+                    svg: "#check-circle-fill",
+                    alert: true
+                });
+            });
+        }
+        
     });
 });
 
