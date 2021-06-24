@@ -26,7 +26,7 @@ router
 
                 router.route('/');
                 res.render('pages/actionPage',
-                {title: "Item deletado 🧺"})
+                {title: "Item deletado 🗑"})
             }
         );
     });

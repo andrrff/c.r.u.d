@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const { query } = require("../models/produto");
 mongoose.Promise = global.Promise;
 var router = express.Router();
 
@@ -46,25 +47,28 @@ router
 
             res.render("pages/data", {
                 title: "Data",
-                nicknameResult: "a",
+                nicknameResult:
+                    "__________________________________________________________________",
                 data: produtos,
             });
         });
     });
-    // router.route("/search/:query?").get((req, res) => {
-    //     padrao.find((error, produtos) => {
-    //         if (error)
-    //             res.render("pages/error", {
-    //                 title: "Error",
-    //                 subtitle: "Infelizmente algo inesperado ocorreu",
-    //                 error: error,
-    //             });
-    //         res.render("pages/data", {
-    //             title: "Data",
-    //             nicknameResult: res.params.query,
-    //             data: produtos,
-    //         });
-    //     });
-    // });
+    router.route("/search?:nickname")
+    .get((req, res) => {
+        padrao.find((error, produtos) => {
+            if (error)
+                res.render("pages/error", {
+                    title: "Error",
+                    subtitle: "Infelizmente algo inesperado ocorreu",
+                    error: error,
+                });
+
+            res.render("pages/data", {
+                title: "Results",
+                nicknameResult: req.query.nickname,
+                data: produtos,
+            });
+        });
+    });
 
     module.exports = router;

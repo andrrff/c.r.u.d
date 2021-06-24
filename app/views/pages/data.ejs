@@ -11,16 +11,16 @@
 
 <main>
     <div class="jumbotron">
-          <form class="d-flex">
+          <form class="d-flex" action="/data/search?" method="GET">
                 <div class="input-group mb-3">
-                    <input type="username" class="form-control" name="search-nickname" placeholder="🚧 in work 🚧" aria-label="Recipient's username" aria-describedby="button-addon2" disabled>
-                    <input class="btn btn-outline-primary"  type="submit" id="button-addon2" disabled>
+                    <input type="username" class="form-control" name="nickname" placeholder="Pesquise por nickname" aria-label="Recipient's username" aria-describedby="button-addon2" >
+                    <input class="btn btn-outline-primary"  type="submit" id="button-addon2">
                 </div>
             </form>
-            
         <% data.forEach(function(index){ %>
+            <% if(nicknameResult == index.nickname || nicknameResult == "__________________________________________________________________"){ %>
                 <div class="list-group" style='margin-bottom: 5pc;'>
-                    <button onclick="window.location.href='./data/<%= index.id %>'" type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                    <button onclick="window.location.href='/data/<%= index.id %>'" type="button" class="list-group-item list-group-item-action active" aria-current="true">
                         /api/data/<%= index.id %>
                     </button>
                     <button type="button" class="list-group-item list-group-item-action" disabled>Primeiro nome: <%= index.firstname %></button>
@@ -30,6 +30,7 @@
                     <button type="button" class="list-group-item list-group-item-action" disabled>Bio: <%= index.bio %></button>
                     <button type="button" class="list-group-item list-group-item-action" disabled>Data de criação: <%= index.dataLancamento %></button>
                 </div>
+                <%}%>
             <% }); %>        
     </div>
 </main>
