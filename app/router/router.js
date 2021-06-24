@@ -75,7 +75,10 @@ router
         padrao.findById(req.params.produto_id, function (error, produto) {
             if (error) res.send("Id do Produto não encontrado....: " + error);
 
-            res.json(produto);
+            res.render("pages/dataUnique", {
+                title: "Data",
+                data: produto,
+            });
         });
     })
 
@@ -112,7 +115,9 @@ router
                 if (error)
                     res.send("Id do Produto não encontrado....: " + error);
 
-                res.json({ message: "Produto Excluído com Sucesso!" });
+                router.route('/');
+                res.render('pages/delete',
+                {title: "Item deletado"})
             }
         );
     });
