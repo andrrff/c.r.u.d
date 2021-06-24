@@ -1,10 +1,7 @@
-//Configurar o Setup do app
-
-//Chamada de pacotes
-
-var mongoose = require('mongoose');
-var express = require('express');
-var app = express();
+const mongoose = require('mongoose');
+const methodOverride = require("method-override");
+const express = require('express');
+const app = express();
 const ProdutoSchema = require("./app/models/produto");
 mongoose.Promise = global.Promise;
 app.use(express.urlencoded({ extended: false }));
@@ -29,11 +26,13 @@ var padrao = mongoose.model("Produtos", ProdutoSchema);
 //Configuracao da varial app para usar o 'bodyParser'
 
 //Definindo a porta onde sera executada nossa aplicacao
-var port = process.env.port || 8000;
+// var PORT = process.env.port || 8000;
 
 //Iniciando a aplicacao
 app.set("view engine", "ejs");
 app.use(express.static("app/public"));
+app.use(methodOverride("_method"));
+
 
 app.get("/", function (req, res) {
     
@@ -148,10 +147,13 @@ app.route('/')
 //     res.send(`Username: ${username} Password: ${password}`);
 // });
 // app.set("views", "./views");
+var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
+var server_host = process.env.YOUR_HOST || "0.0.0.0";
+app.listen(server_port, server_host, function () {
+    console.log("Listening on port %d", server_port);
+});
 app.use("/api", require("./app/router/router"));
 
-var port = process.env.port || 8000;
+// app.listen(process.env.port || 8000);
 
-app.listen(port);
-
-console.log("Iniciando o app com a porta " + port);
+// console.log("Iniciando o app com a porta " + port);
