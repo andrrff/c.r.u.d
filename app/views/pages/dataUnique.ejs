@@ -23,8 +23,8 @@
                     <button type="button" class="list-group-item list-group-item-action" disabled>Endereço: <%= data.address %></button>
                     <button type="button" class="list-group-item list-group-item-action" disabled>Bio: <%= data.bio %></button>
                     <button type="button" class="list-group-item list-group-item-action" disabled>Data de criação: <%= data.dataLancamento %></button>
-                    <button type="button" name="put" class="list-group-item list-group-item-warning list-group-item-warnig">🚧 Editar 🚧</button>
-                    <button type="produto_id" onclick="window.location.href='./<%= data.id %>'" name="submit" class="list-group-item list-group-item-danger list-group-item-danger"> Deletar </button>
+                    <button type="button" name="put" onclick="window.location.href='./<%= data.id %>/mode_edit'" class="list-group-item list-group-item-warning list-group-item-warnig"> Editar </button>
+                    <button type="produto_id" onclick="window.location.href='./<%= data.id %>/'" name="submit" class="list-group-item list-group-item-danger list-group-item-danger"> Deletar </button>
                 </div>
                 <input type="hidden" name="_method" value="DELETE">
             </form>

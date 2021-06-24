@@ -32,12 +32,30 @@ router
             });
         });
     })
+router
+    .route("/data/:produto_id/mode_edit")
+    .get((req, res) => {
+        //Função para poder Selecionar um determinado produto por ID - irá verificar se caso não encontrar um detemrinado
+        //produto pelo id... retorna uma mensagem de error:
+        padrao.findById(req.params.produto_id, function (error, produto) {
+            if (error)
+                res.render("pages/error", {
+                    title: "Error",
+                    subtitle: "Infelizmente algo inesperado ocorreu",
+                    error: error,
+                });
 
+            res.render("pages/edit", {
+                title: "Data",
+                data: produto,
+            });
+        });
+    })
     // 4) Método: PUT por Id: (acessar em: PUT http://localhost:8000/data/:produto_id)
     .put((req, res) => {
         //Primeiro: para atualizarmos, precisamos primeiro achar 'Id' do 'Produto':
         padrao.findById(req.params.produto_id, (error, produto) => {
-            if (error) 
+            if (error)
                 res.render("pages/error", {
                     title: "Error",
                     subtitle: "Infelizmente algo inesperado ocorreu",
@@ -60,7 +78,9 @@ router
                         error: error,
                     });
 
-                res.json({ message: "Produto atualizado com sucesso!" });
+                res.render("pages/actionPage", {
+                    title: "Item editado ✅"
+                });
             });
         });
     });
