@@ -149,8 +149,6 @@ app.route('/')
 // app.set("views", "./views");
 app.use("/api", require("./app/router/router"));
 
-var port = process.env.port || 8000;
-
-app.listen(port);
+app.listen(process.env.port || 8000);
 
 console.log("Iniciando o app com a porta " + port);
