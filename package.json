@@ -1,0 +1,27 @@
+{
+    "name": "crud-test-hivelabs",
+    "version": "1.0.0",
+    "description": "Uma aplicação usando API RESTful + Node + MongoDB + Express",
+    "main": "./server.js",
+    "scripts": {
+        "start": "nodemon -e css,ejs,js,json --watch app"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/andrrff/c.r.u.d"
+    },
+    "dependencies": {
+        "ejs": "^1.0.0",
+        "express": "5.0.0-alpha.8",
+        "method-override": "^3.0.0",
+        "mongoose": "*",
+        "nodemon": "^2.0.7",
+        "request": "2.88.2"
+    },
+    "author": "André da Silva Freitas",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/andrrff/c.r.u.d/issues"
+    },
+    "homepage": "https://github.com/andrrff/c.r.u.d/blob/main/README.md"
+}
