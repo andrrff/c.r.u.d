@@ -17,6 +17,8 @@ var ProdutoSchema = new Schema({
     nickname: String,
     address: String,
     bio: String,
+    dataLancamento: String,
+    dataEdit: String
 });
 
 module.exports = ProdutoSchema;
