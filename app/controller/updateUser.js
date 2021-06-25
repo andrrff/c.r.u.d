@@ -3,18 +3,15 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 var router = express.Router();
 
-const ProdutoSchema = require("../models/produto");
+const UserSchema = require("../models/user");
 
-//Criando uma instancia das rotas via Express
-// const router = express.Router();
+const padrao = mongoose.model("Users", UserSchema);
 
-const padrao = mongoose.model("Produtos", ProdutoSchema);
-
-//Rotas que irão terminar em '/data/:produto_id' (servir tanto para: GET, PUT & DELETE: id):
 router
+    // Rota
     .route("/data/:produto_id")
 
-    // 3) Método: GET por Id: (acessar em: GET http://localhost:8000/data/:produto_id)
+    // Este get será usado para pegar o elemento ID acessado
     .get((req, res) => {
         //Função para poder Selecionar um determinado produto por ID - irá verificar se caso não encontrar um detemrinado
         //produto pelo id... retorna uma mensagem de error:
@@ -33,9 +30,10 @@ router
         });
     })
 router
+    // Rota de 
     .route("/data/:produto_id/mode_edit")
     .get((req, res) => {
-        padrao.find((error, produtos) => {
+        padrao.find((error, _elementos) => {
             if (error)
                 res.render("pages/error", {
                     title: "Error",
@@ -47,7 +45,7 @@ router
         });
         //Função para poder Selecionar um determinado produto por ID - irá verificar se caso não encontrar um detemrinado
         //produto pelo id... retorna uma mensagem de error:
-        padrao.findById(req.params.produto_id, function (error, produto) {
+        padrao.findById(req.params.produto_id, function (error, elemento) {
             if (error)
                 res.render("pages/error", {
                     title: "Error",
@@ -57,14 +55,14 @@ router
 
             res.render("pages/edit", {
                 title: "Data",
-                data: produto,
+                data: elemento,
             });
         });
     })
     // 4) Método: PUT por Id: (acessar em: PUT http://localhost:8000/data/:produto_id)
     .put((req, res) => {
         //Primeiro: para atualizarmos, precisamos primeiro achar 'Id' do 'Produto':
-        padrao.find((error, produtos) => 
+        padrao.find((error, elementos) => 
         {
             if (error)
                 res.render("pages/error", {
@@ -72,30 +70,46 @@ router
                     subtitle: "Infelizmente algo inesperado ocorreu",
                     error: error,
                 });
-                padrao.findById(req.params.produto_id, (error, produto) => {
+                padrao.findById(req.params.produto_id, (error, elemento) => {
                     if (error)
                         res.render("pages/error", {
                             title: "Error",
                             subtitle: "Infelizmente algo inesperado ocorreu",
                             error: error,
                         });
-        
+                    var currentdate = new Date();
+                    var datetime =
+                        currentdate.getDate() +
+                        "/" +
+                        (currentdate.getMonth() + 1) +
+                        "/" +
+                        currentdate.getFullYear() +
+                        " - " +
+                        currentdate.getHours() +
+                        ":" +
+                        currentdate.getMinutes() +
+                        ":" +
+                        currentdate.getSeconds();
+                    var nickname = elemento.nickname;
                     //Segundo:
-                    produto.firstname = req.body.firstname;
-                    produto.lastname = req.body.lastname;
-                    produto.nickname = req.body.nickname;
-                    produto.address = req.body.address;
-                    produto.bio = req.body.bio;
+                    elemento.firstname = req.body.firstname;
+                    elemento.lastname = req.body.lastname;
+                    elemento.nickname = req.body.nickname;
+                    elemento.address = req.body.address;
+                    elemento.bio = req.body.bio;
+                    elemento.dataUltima = datetime;
         
                     //Terceiro: Agora que já atualizamos os dados, vamos salvar as propriedades:
                     var errorEqualsNick = false;
 
-                    produtos.forEach(element => {
-                        if(element.nickname == produto.nickname ||
-                            produto.bio.length > 100 ||
-                            produto.nickname.length > 30)
-                        {
-                            errorEqualsNick = true
+                    elementos.forEach(iterator => {
+                        if (
+                            nickname != elemento.nickname && 
+                            iterator.nickname == elemento.nickname ||
+                            elemento.bio.length > 100 ||
+                            elemento.nickname.length > 30
+                        ) {
+                            errorEqualsNick = true;
                         }
                     });
                     if (errorEqualsNick) {
@@ -105,7 +119,7 @@ router
                             error: " Possiveis causas:\n nickname já exitente;\n nickname muito grande; \nBio muito grande",
                         });
                     } else {
-                        produto.save((_error) => {
+                        elemento.save((_error) => {
                             res.render("pages/actionPage", {
                                 title: "Item editado ✅",
                             });
