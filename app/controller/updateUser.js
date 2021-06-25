@@ -29,6 +29,23 @@ router
             });
         });
     })
+router.route("/data/:produto_id/view_raw").get((req, res) => {
+    //Função para poder Selecionar um determinado produto por ID - irá verificar se caso não encontrar um detemrinado
+    //produto pelo id... retorna uma mensagem de error:
+    padrao.findById(req.params.produto_id, function (error, produto) {
+        if (error)
+            res.render("pages/error", {
+                title: "Error",
+                subtitle: "Infelizmente algo inesperado ocorreu",
+                error: error,
+            });
+
+        res.send(produto, function (error) {
+            console.log("Error : ", error);
+        });
+    });
+});
+
 router
     // Rota de 
     .route("/data/:produto_id/mode_edit")
@@ -98,6 +115,7 @@ router
                     elemento.address = req.body.address;
                     elemento.bio = req.body.bio;
                     elemento.dataUltima = datetime;
+                    
         
                     //Terceiro: Agora que já atualizamos os dados, vamos salvar as propriedades:
                     var errorEqualsNick = false;

@@ -28,6 +28,11 @@
                 </div>
                 <input type="hidden" name="_method" value="DELETE">
             </form>
+            <form class="d-flex" action="/data/<%= data.id %>/view_raw" method="GET">
+                <div class="input-group mb-3">
+                    <input class="btn btn-outline-primary"  type="submit" id="button-addon2" value="view raw">
+                </div>
+            </form>
     </div>
 </main>
 
