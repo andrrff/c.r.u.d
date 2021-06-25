@@ -14,7 +14,24 @@
         
         
         <h1><%=title%></h1>
-        <a href="/">Voltar ao início ↩</a>
+        <form class="">
+                <input
+                    class="btn btn-outline-primary "
+                    id="button-addon2"
+                    action="action"
+                    onclick="window.history.go(-1); return false;"
+                    type="submit"
+                    value="Voltar ao editor"
+                />
+                <input
+                    class="btn btn-outline-primary "
+                    id="button-addon2"
+                    action="action"
+                    onclick="window.history.go(-3); return false;"
+                    type="submit"
+                    value="Data"
+                />
+        </form>
 
         
     </div>
