@@ -2,41 +2,36 @@ const express = require("express");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 var router = express.Router();
-
+const Msg = require("../models/msg");
 const UserSchema = require("../models/user");
 
+const msg = new Msg();
 const padrao = mongoose.model("Users", UserSchema);
 
 router
-    // Rota
     .route("/data/:produto_id")
 
-    // Este get será usado para pegar o elemento ID acessado
     .get((req, res) => {
-        //Função para poder Selecionar um determinado produto por ID - irá verificar se caso não encontrar um detemrinado
-        //produto pelo id... retorna uma mensagem de error:
         padrao.findById(req.params.produto_id, function (error, produto) {
             if (error) 
                 res.render("pages/error", {
-                    title: "Error",
-                    subtitle: "Infelizmente algo inesperado ocorreu",
+                    title: msg.titleData,
+                    subtitle: msg.titleData,
                     error: error,
                 });
 
             res.render("pages/dataUnique", {
-                title: "Data",
+                title: msg.titleData,
                 data: produto,
             });
         });
     })
 router.route("/data/:produto_id/view_raw").get((req, res) => {
-    //Função para poder Selecionar um determinado produto por ID - irá verificar se caso não encontrar um detemrinado
-    //produto pelo id... retorna uma mensagem de error:
     padrao.findById(req.params.produto_id, function (error, produto) {
         if (error)
             res.render("pages/error", {
-                title: "Error",
-                subtitle: "Infelizmente algo inesperado ocorreu",
+                title: msg.titleData,
+                subtitle: msg.titleData,
                 error: error,
             });
 
@@ -47,26 +42,23 @@ router.route("/data/:produto_id/view_raw").get((req, res) => {
 });
 
 router
-    // Rota de 
     .route("/data/:produto_id/mode_edit")
     .get((req, res) => {
         padrao.find((error, _elementos) => {
             if (error)
                 res.render("pages/error", {
-                    title: "Error",
-                    subtitle: "Infelizmente algo inesperado ocorreu",
+                    title: msg.titleData,
+                    subtitle: msg.titleData,
                     error: error,
                 });
 
 
         });
-        //Função para poder Selecionar um determinado produto por ID - irá verificar se caso não encontrar um detemrinado
-        //produto pelo id... retorna uma mensagem de error:
         padrao.findById(req.params.produto_id, function (error, elemento) {
             if (error)
                 res.render("pages/error", {
-                    title: "Error",
-                    subtitle: "Infelizmente algo inesperado ocorreu",
+                    title: msg.titleData,
+                    subtitle: msg.titleData,
                     error: error,
                 });
 
@@ -76,24 +68,25 @@ router
             });
         });
     })
-    // 4) Método: PUT por Id: (acessar em: PUT http://localhost:8000/data/:produto_id)
     .put((req, res) => {
-        //Primeiro: para atualizarmos, precisamos primeiro achar 'Id' do 'Produto':
         padrao.find((error, elementos) => 
         {
             if (error)
                 res.render("pages/error", {
-                    title: "Error",
-                    subtitle: "Infelizmente algo inesperado ocorreu",
+                    title: msg.titleData,
+                    subtitle: msg.titleData,
                     error: error,
                 });
                 padrao.findById(req.params.produto_id, (error, elemento) => {
                     if (error)
                         res.render("pages/error", {
-                            title: "Error",
-                            subtitle: "Infelizmente algo inesperado ocorreu",
+                            title: msg.titleData,
+                            subtitle: msg.titleData,
                             error: error,
                         });
+                    //Guardamos o valor já presente no BD
+                    var static_nickname = elemento.nickname;
+                    var errorEqualsNick = false;
                     var currentdate = new Date();
                     var datetime =
                         currentdate.getDate() +
@@ -107,22 +100,17 @@ router
                         currentdate.getMinutes() +
                         ":" +
                         currentdate.getSeconds();
-                    var nickname = elemento.nickname;
-                    //Segundo:
+
                     elemento.firstname = req.body.firstname;
                     elemento.lastname = req.body.lastname;
                     elemento.nickname = req.body.nickname;
                     elemento.address = req.body.address;
                     elemento.bio = req.body.bio;
                     elemento.dataUltima = datetime;
-                    
-        
-                    //Terceiro: Agora que já atualizamos os dados, vamos salvar as propriedades:
-                    var errorEqualsNick = false;
 
-                    elementos.forEach(iterator => {
+                    elementos.forEach((iterator) => {
                         if (
-                            nickname != elemento.nickname && 
+                            static_nickname != elemento.nickname &&
                             iterator.nickname == elemento.nickname ||
                             elemento.bio.length > 100 ||
                             elemento.nickname.length > 30
@@ -132,14 +120,14 @@ router
                     });
                     if (errorEqualsNick) {
                         res.render("pages/error", {
-                            title: "Error",
-                            subtitle: "Infelizmente algo inesperado ocorreu",
-                            error: " Possiveis causas:\n nickname já exitente;\n nickname muito grande; \nBio muito grande",
+                            title: msg.titleData,
+                            subtitle: msg.titleData,
+                            error: msg.elementError,
                         });
                     } else {
                         elemento.save((_error) => {
                             res.render("pages/actionPage", {
-                                title: "Item editado ✅",
+                                title: msg.edited,
                             });
                         });
                     }

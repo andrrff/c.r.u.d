@@ -4,26 +4,26 @@ mongoose.Promise = global.Promise;
 var router = express.Router();
 
 const UserSchema = require("../models/user");
+const Notification = require("../models/notification");
+const Msg = require("../models/msg");
 
+const notificacao = new Notification(true);
+const msg = new Msg();
 const padrao = mongoose.model("User", UserSchema);
 
 // Organização padrão para Home Page `index.ejs`
 router.get("/", (_req, res) => {
     res.render("pages/index", {
-        title: "Forms",
-        subtitle: "Preencha corretamente os campos abaixo",
-        notificacao: " ",
-        tipoAlert: " ",
-        svg: " ",
-        alert: false,
+        title: msg.titleForms,
+        subtitle: msg.subtitleForms,
+        notificacao: "",
     });
 });
 
-// POSTagem com os valores requeridos
 router.route("/").post((req, res) => {
     var elemento = new padrao();
-    var currentdate = new Date();
     var errorBool = false;
+    var currentdate = new Date();
     var datetime =
         currentdate.getDate() +
         "/" +
@@ -37,7 +37,6 @@ router.route("/").post((req, res) => {
         ":" +
         currentdate.getSeconds();
 
-    //Aqui vamos setar os campos do elemento (via request):
     elemento.firstname = req.body.firstname;
     elemento.lastname = req.body.lastname;
     elemento.nickname = req.body.username;
@@ -45,17 +44,19 @@ router.route("/").post((req, res) => {
     elemento.bio = req.body.bio;
     elemento.dataLancamento = datetime;
     elemento.dataUltima = datetime;
-    padrao.find((error, elements) => {
+    padrao.find((error, elementos) => {
         if (error)
             res.render("pages/error", {
-                title: "Error",
-                subtitle: "Infelizmente algo inesperado ocorreu",
+                title: msg.titleError,
+                subtitle: msg.subtitleError,
                 error: error
             });
 
-        if(elements[0] != undefined)
+        
+        // Verificando se a collection está vazia
+        if(elementos[0] != undefined)
         {
-            elements.forEach((element) => {
+            elementos.forEach((element) => {
             if (
                 element.nickname == elemento.nickname ||
                 elemento.bio.length > 100 ||
@@ -63,31 +64,25 @@ router.route("/").post((req, res) => {
             )
                 errorBool = true;
         });
+        const notificacao = new Notification(!errorBool);
             if(!errorBool){
                 elemento.save((error) => {
                     if (error)
                         res.send(
-                            "Erro ao tentar salvar o elemento....: " + error
+                            msg.saveError + error
                         );
-
+                    
                     res.render("pages/index", {
-                        title: "Forms",
-                        subtitle: "Preencha corretamente os campos abaixo",
-                        notificacao: "Cadastro efeutuado com sucesso 😉!",
-                        tipoAlert: "alert-success",
-                        svg: "#check-circle-fill",
-                        alert: true,
+                        title: msg.titleForms,
+                        subtitle: msg.subtitleForms,
+                        notificacao: notificacao,
                     });
                 });
             } else {
                 res.render("pages/index", {
-                    title: "Forms",
-                    subtitle: "Preencha corretamente os campos abaixo",
-                    notificacao:
-                        "Ocorreu um erro no cadastro 😢!\n Possiveis causas:\n nickname já exitente;\n nickname muito grande; \nBio muito grande",
-                    tipoAlert: "alert-danger",
-                    svg: "#exclamation-triangle-fill",
-                    alert: true,
+                    title: msg.titleForms,
+                    subtitle: msg.subtitleForms,
+                    notificacao: notificacao,
                 });
             }
         }
@@ -97,12 +92,9 @@ router.route("/").post((req, res) => {
                     res.send("Erro ao tentar salvar o elemento....: " + error);
 
                 res.render("pages/index", {
-                    title: "Forms",
-                    subtitle: "Preencha corretamente os campos abaixo",
-                    notificacao: "Cadastro efeutuado com sucesso 😉!",
-                    tipoAlert: "alert-success",
-                    svg: "#check-circle-fill",
-                    alert: true
+                    title: msg.titleForms,
+                    subtitle: msg.subtitleForms,
+                    notificacao: notificacao
                 });
             });
         }
