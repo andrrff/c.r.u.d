@@ -28,10 +28,18 @@
                 </div>
                 <input type="hidden" name="_method" value="DELETE">
             </form>
-            <form class="d-flex" action="/data/<%= data.id %>/view_raw" method="GET">
-                <div class="input-group mb-3">
-                    <input class="btn btn-outline-primary"  type="submit" id="button-addon2" value="view raw">
-                </div>
+            <form class="d-flex justify-content-around bd-highlight mb-3" action="/data/<%= data.id %>/view_raw" method="GET">
+                <!-- <div class="d-flex justify-content-around bd-highlight mb-3"> -->
+                    <input
+                        class="btn btn-outline-primary p-2 bd-highlight"
+                        id="button-addon2"
+                        action="action"
+                        onclick="window.history.go(-1); return false;"
+                        type="submit"
+                        value="Voltar"
+                    />
+                    <input class="btn btn-outline-primary p-2 bd-highlight"  type="submit" id="button-addon2" value="view raw">
+                <!-- </div> -->
             </form>
     </div>
 </main>
