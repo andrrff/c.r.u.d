@@ -1,9 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-const ProdutoSchema = require("../models/produto");
 
-//Criando uma instancia das rotas via Express
+// Criando uma instancia das rotas via Express
 const router = express.Router();
 
 router.route("/").get((_req, res) => {

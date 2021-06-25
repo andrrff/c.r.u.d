@@ -1,43 +1,21 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const { query } = require("../models/produto");
+const { query } = require("../models/user");
 mongoose.Promise = global.Promise;
 var router = express.Router();
 
-const ProdutoSchema = require("../models/produto");
+const UserSchema = require("../models/user");
 
-//Criando uma instancia das rotas via Express
-// const router = express.Router();
-
-const padrao = mongoose.model("Produtos", ProdutoSchema);
-
+// Importando o modela schema para a `const padrao`
+const padrao = mongoose.model("User", UserSchema);
 
 router
+    // Rota principal em `/data`
     .route("/")
 
-    // 1) Método: Criar Produto (acessar em: POST http://localhost:8000/data)
-    .post((_req, res) => {
-        var produto = new padrao();
-
-        //Aqui vamos setar os campos do produto (via request):
-        produto.firstname = "###########";
-        produto.lastname = "###########";
-        produto.nickname = "defaultUser";
-        produto.address = "###########";
-        produto.bio = "###########";
-        // res.render("../../views/pages/index");
-
-        produto.save(function (error) {
-            if (error)
-                res.send("Erro ao tentar salvar o Produto....: " + error);
-
-            res.json({ message: "Produto Cadastrado com Sucesso!" });
-        });
-    })
-
-    // 2) Método: Selecionar Todos Produtos (acessar em: GET http://localhost:8000/data)
+    // Metodo para selecionar todos os elementos do nosso banco de dados
     .get((_req, res) => {
-        padrao.find((error, produtos) => {
+        padrao.find((error, elementos) => {
             if (error)
                 res.render("pages/error", {
                     title: "Error",
@@ -47,15 +25,21 @@ router
 
             res.render("pages/data", {
                 title: "Data",
+                // Este valor vai para o desvio condicional do arquivo `data.ej`
+                // ele é necessario por ser uma string que é ilógica existe ao ser cadastrada
+                // por causa do limite de caracteres
                 nicknameResult:
                     "__________________________________________________________________",
-                data: produtos,
+                data: elementos,
             });
         });
     });
+    // Ao efetuar o `submit` no form no arquivo `data.ejs`
+    // nos iremos pegar o query com uma (req), com isso iremos atrás 
+    // do parametro nickname
     router.route("/search?:nickname")
     .get((req, res) => {
-        padrao.find((error, produtos) => {
+        padrao.find((error, elementos) => {
             if (error)
                 res.render("pages/error", {
                     title: "Error",
@@ -66,7 +50,7 @@ router
             res.render("pages/data", {
                 title: "Results",
                 nicknameResult: req.query.nickname,
-                data: produtos,
+                data: elementos,
             });
         });
     });
