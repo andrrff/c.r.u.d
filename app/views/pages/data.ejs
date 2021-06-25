@@ -21,7 +21,7 @@
             <% if(nicknameResult == index.nickname || nicknameResult == "__________________________________________________________________"){ %>
                 <div class="list-group" style='margin-bottom: 5pc;'>
                     <button onclick="window.location.href='/data/<%= index.id %>'" type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                        /api/data/<%= index.id %>
+                        /data/<%= index.id %>
                     </button>
                     <button type="button" class="list-group-item list-group-item-action" disabled>Primeiro nome: <%= index.firstname %></button>
                     <button type="button" class="list-group-item list-group-item-action" disabled>Segundo nome: <%= index.lastname %></button>

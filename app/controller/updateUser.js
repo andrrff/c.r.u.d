@@ -98,6 +98,7 @@ router
                     elemento.address = req.body.address;
                     elemento.bio = req.body.bio;
                     elemento.dataUltima = datetime;
+                    
         
                     //Terceiro: Agora que já atualizamos os dados, vamos salvar as propriedades:
                     var errorEqualsNick = false;

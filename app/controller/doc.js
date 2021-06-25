@@ -8,7 +8,7 @@ const router = express.Router();
 router.route("/").get((_req, res) => {
     res.render("pages/doc", {
         title: "Documentação",
-        subtitle: "Siga os passos corretamente 😊",
+        subtitle: "Bem-vindo ao live-demo do meu CRUD 😊",
         notificacao: " Clique no header azul em algum item da rota `/data/` para ter mais opções de administração.",
         tipoAlert: "alert-primary",
         svg: "#info-fill",
