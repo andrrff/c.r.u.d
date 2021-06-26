@@ -4,8 +4,7 @@
     "description": "Uma aplicação usando API RESTful + Node + MongoDB + Express",
     "main": "./app.js",
     "scripts": {
-        "start": "nodemon -e css,ejs,js,json --watch app | bunyan",
-        "server": "gulp server "
+        "start": "nodemon -e css,ejs,js,json --watch app | bunyan"
     },
     "repository": {
         "type": "git",
