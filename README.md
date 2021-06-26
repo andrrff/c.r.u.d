@@ -4,11 +4,26 @@
 [![GitHub repo size](https://img.shields.io/github/repo-size/andrrff/c.r.u.d)](https://github.com/andrrff/c.r.u.d) 
 [![GitHub](https://img.shields.io/github/license/andrrff/c.r.u.d)](https://github.com/andrrff/c.r.u.d/blob/master/LICENSE) 
 
+____
+
+## Comando
+```
+npm start
+```
+porta:
+```
+localhost
+```
+
+____
+
 ## Regras
 - Somente UM nickname pode existir
 - O nickname deve ter no máximo 30 caracteres
 - A bio deve ter no máximo 100 caracteres
 `OBS* Estas regras devem ser seguidas à risca!`
+
+____
 
 ## Router
 ### Resumo
@@ -30,6 +45,8 @@ Que bom que ainda está lendo isso, chegamos nos dois arquivos que usam de metod
 #### `app.js`
 Este e o arquivo principal, ele é o responsável por conectar tudo que usaremos, nas pastas views, controller e os models.
 
+____
+
 ## FAQs
 - Como adicionar um item no database?
   - Vá para pagina Home
@@ -48,5 +65,6 @@ Este e o arquivo principal, ele é o responsável por conectar tudo que usaremos
   - Clique no botão `Deletar`
   - ATENÇÃO❗❗❗ O ITEM QUANDO DELETADO NÃO PODE MAIS SER RECUPERADO
 
+____
 
 ## [Livedemo](https://crud-andrrff.herokuapp.com/)
