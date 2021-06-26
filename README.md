@@ -1,6 +1,8 @@
 # Create.Read.Update.Delete - C.R.U.D
 
-[Livedemo](https://crud-andrrff.herokuapp.com/)
+[![Website](https://img.shields.io/website?up_message=open&url=https%3A%2F%2Fcrud-andrrff.herokuapp.com%2F)](https://crud-andrrff.herokuapp.com/)
+![GitHub repo size](https://img.shields.io/github/repo-size/andrrff/c.r.u.d)
+![GitHub](https://img.shields.io/github/license/andrrff/c.r.u.d)
 
 ## Regras
 - Somente UM nickname pode existir
@@ -47,3 +49,4 @@ Este e o arquivo principal, ele é o responsável por conectar tudo que usaremos
   - ATENÇÃO❗❗❗ O ITEM QUANDO DELETADO NÃO PODE MAIS SER RECUPERADO
 
 
+## [Livedemo](https://crud-andrrff.herokuapp.com/)
