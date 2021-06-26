@@ -42,7 +42,7 @@ router.route("/").post((req, res) => {
                 error: error,
             });
 
-        // Verificando se a collection está vazia
+        // Verificando se a collection existe
         if (elementos[0] != undefined) {
             elementos.forEach((element) => {
                 if (
