@@ -1,8 +1,8 @@
 # Create.Read.Update.Delete - C.R.U.D
 
 [![Website](https://img.shields.io/website?up_message=open&url=https%3A%2F%2Fcrud-andrrff.herokuapp.com%2F)](https://crud-andrrff.herokuapp.com/)
-![GitHub repo size](https://img.shields.io/github/repo-size/andrrff/c.r.u.d)
-![GitHub](https://img.shields.io/github/license/andrrff/c.r.u.d)
+[![GitHub repo size](https://img.shields.io/github/repo-size/andrrff/c.r.u.d)](https://github.com/andrrff/c.r.u.d) 
+[![GitHub](https://img.shields.io/github/license/andrrff/c.r.u.d)](https://github.com/andrrff/c.r.u.d/blob/master/LICENSE) 
 
 ## Regras
 - Somente UM nickname pode existir

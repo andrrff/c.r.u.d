@@ -88,6 +88,21 @@ router
                     const static_nickname = elemento.nickname;
                     var errorEqualsNick = false;
                     var currentdate = new Date();
+<<<<<<< HEAD
+=======
+                    var datetime =
+                        currentdate.getDate() +
+                        "/" +
+                        (currentdate.getMonth() + 1) +
+                        "/" +
+                        currentdate.getFullYear() +
+                        " - " +
+                        currentdate.getHours() +
+                        ":" +
+                        currentdate.getMinutes() +
+                        ":" +
+                        currentdate.getSeconds();
+>>>>>>> c4951415ecc241ed44c5dd132b475c3c563f3929
 
                     elemento.firstname = req.body.firstname;
                     elemento.lastname = req.body.lastname;
