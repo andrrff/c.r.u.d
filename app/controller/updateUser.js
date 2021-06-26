@@ -87,22 +87,9 @@ router
                     //Guardamos o valor já presente no BD
                     const static_nickname = elemento.nickname;
                     var errorEqualsNick = false;
+                    //Poderiamos usar este valor `new Date().toDateString() + " | " + new Date().toTimeString()`
+                    // que é mais legivel para o usuario, mas eu optei por não mudar o padrão do schema
                     var currentdate = new Date();
-<<<<<<< HEAD
-=======
-                    var datetime =
-                        currentdate.getDate() +
-                        "/" +
-                        (currentdate.getMonth() + 1) +
-                        "/" +
-                        currentdate.getFullYear() +
-                        " - " +
-                        currentdate.getHours() +
-                        ":" +
-                        currentdate.getMinutes() +
-                        ":" +
-                        currentdate.getSeconds();
->>>>>>> c4951415ecc241ed44c5dd132b475c3c563f3929
 
                     elemento.firstname = req.body.firstname;
                     elemento.lastname = req.body.lastname;
