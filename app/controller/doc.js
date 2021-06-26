@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-const Msg = require("../models/msg");
-const Notification = require("../models/notification");
+const Msg = require("../public/js/msg");
+const Notification = require("../public/js/notification");
 
 const msg = new Msg();
 const notificacao = new Notification(true);

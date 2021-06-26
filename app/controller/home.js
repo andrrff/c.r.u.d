@@ -4,8 +4,8 @@ mongoose.Promise = global.Promise;
 var router = express.Router();
 
 const UserSchema = require("../models/user");
-const Notification = require("../models/notification");
-const Msg = require("../models/msg");
+const Notification = require("../public/js/notification");
+const Msg = require("../public/js/msg");
 
 const notificacao = new Notification(true);
 const msg = new Msg();

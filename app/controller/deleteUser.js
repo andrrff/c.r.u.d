@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const UserSchema = require("../models/user");
 const padrao = mongoose.model("Users", UserSchema);
-const Msg = require("../models/msg");
+const Msg = require("../public/js/msg");
 
 const msg = new Msg();
 
