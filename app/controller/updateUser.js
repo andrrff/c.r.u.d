@@ -100,27 +100,25 @@ router
 
                     elementos.forEach((iterator) => {
                         if (
-                            (static_nickname != elemento.nickname &&
-                                iterator.nickname == elemento.nickname) ||
+                            static_nickname != elemento.nickname &&
+                            iterator.nickname == elemento.nickname ||
                             elemento.bio.length > 100 ||
                             elemento.nickname.length > 30
-                        ) {
-                            errorEqualsNick = true;
-                        }
+                            )
+                                errorEqualsNick = true;
                     });
-                    if (errorEqualsNick) {
+                    if (errorEqualsNick)
                         res.render("pages/error", {
                             title: msg.titleData,
                             subtitle: msg.titleData,
                             error: msg.elementError,
                         });
-                    } else {
+                    else
                         elemento.save((_error) => {
                             res.render("pages/actionPage", {
                                 title: msg.edited,
                             });
                         });
-                    }
                 });
         })
     });

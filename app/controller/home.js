@@ -42,46 +42,33 @@ router.route("/").post((req, res) => {
                 error: error,
             });
 
-        // Verificando se a collection está vazia
+        // Verificando se a collection existe
         if (elementos[0] != undefined) {
             elementos.forEach((element) => {
                 if (
                     element.nickname == elemento.nickname ||
                     elemento.bio.length > 100 ||
                     elemento.nickname.length > 30
-                )
-                    errorBool = true;
+                    )
+                        errorBool = true;
             });
-            const notificacao = new Notification(!errorBool);
-            if (!errorBool) {
+            if (!errorBool)
                 elemento.save((error) => {
                     if (error) res.send(msg.saveError + error);
-
-                    res.render("pages/index", {
-                        title: msg.titleForms,
-                        subtitle: msg.subtitleForms,
-                        notificacao: notificacao,
-                    });
                 });
-            } else {
-                res.render("pages/index", {
-                    title: msg.titleForms,
-                    subtitle: msg.subtitleForms,
-                    notificacao: notificacao,
-                });
-            }
-        } else {
+        } else
             elemento.save((error) => {
                 if (error)
                     res.send("Erro ao tentar salvar o elemento....: " + error);
-
-                res.render("pages/index", {
-                    title: msg.titleForms,
-                    subtitle: msg.subtitleForms,
-                    notificacao: notificacao,
-                });
             });
-        }
+        
+        //Render index + notificação
+        const notificacao = new Notification(!errorBool);
+        res.render("pages/index", {
+            title: msg.titleForms,
+            subtitle: msg.subtitleForms,
+            notificacao: notificacao,
+        });
     });
 });
 
