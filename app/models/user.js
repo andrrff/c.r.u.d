@@ -7,8 +7,8 @@ var UserSchema = new Schema({
     nickname: String,
     address: String,
     bio: String,
-    dataLancamento: String,
-    dataUltima: String
+    dataLancamento: Date,
+    dataUltima: Date,
 });
 
 module.exports = UserSchema;

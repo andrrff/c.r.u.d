@@ -85,33 +85,21 @@ router
                             error: error,
                         });
                     //Guardamos o valor já presente no BD
-                    var static_nickname = elemento.nickname;
+                    const static_nickname = elemento.nickname;
                     var errorEqualsNick = false;
                     var currentdate = new Date();
-                    var datetime =
-                        currentdate.getDate() +
-                        "/" +
-                        (currentdate.getMonth() + 1) +
-                        "/" +
-                        currentdate.getFullYear() +
-                        " - " +
-                        currentdate.getHours() +
-                        ":" +
-                        currentdate.getMinutes() +
-                        ":" +
-                        currentdate.getSeconds();
 
                     elemento.firstname = req.body.firstname;
                     elemento.lastname = req.body.lastname;
                     elemento.nickname = req.body.nickname;
                     elemento.address = req.body.address;
                     elemento.bio = req.body.bio;
-                    elemento.dataUltima = datetime;
+                    elemento.dataUltima = currentdate;
 
                     elementos.forEach((iterator) => {
                         if (
-                            static_nickname != elemento.nickname &&
-                            iterator.nickname == elemento.nickname ||
+                            (static_nickname != elemento.nickname &&
+                                iterator.nickname == elemento.nickname) ||
                             elemento.bio.length > 100 ||
                             elemento.nickname.length > 30
                         ) {
