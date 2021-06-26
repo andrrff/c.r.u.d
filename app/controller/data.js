@@ -13,18 +13,21 @@ router
     .get((_req, res) => {
         padrao.find((error, elementos) => {
             if (error)
+            {
                 res.render("pages/error", {
                     title: msg.titleData,
                     subtitle: msg.titleData,
                     error: error,
                 });
-
+                console.log("GET -> /data ❌ " + error)
+            }
             res.render("pages/data", {
                 title: msg.titleData,
                 nicknameResult:
                     "__________________________________________________________________",
                 data: elementos,
             });
+            console.log("GET -> /data ✅");
         });
     });
 
@@ -44,6 +47,7 @@ router
                 nicknameResult: req.query.nickname,
                 data: elementos,
             });
+            console.log("GET -> /data/search?nickname=" + req.query.nickname + " ✅");
         });
     });
 

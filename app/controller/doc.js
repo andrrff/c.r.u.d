@@ -15,6 +15,7 @@ router.route("/").get((_req, res) => {
         subtitle: msg.sutitleDoc,
         notificacao: notificacao,
     });
+    console.log("GET -> /doc ✅");
 });
 
 module.exports = router;

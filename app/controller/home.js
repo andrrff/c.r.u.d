@@ -18,6 +18,7 @@ router.get("/", (_req, res) => {
         subtitle: msg.subtitleForms,
         notificacao: "",
     });
+    console.log("GET -> / ✅");
 });
 
 router.route("/").post((req, res) => {
@@ -36,11 +37,14 @@ router.route("/").post((req, res) => {
     elemento.dataUltima = currentdate;
     padrao.find((error, elementos) => {
         if (error)
+        {
             res.render("pages/error", {
                 title: msg.titleError,
                 subtitle: msg.subtitleError,
                 error: error,
             });
+            console.log("POST -> / ❌ - " + error);
+        }
 
         // Verificando se a collection existe
         if (elementos[0] != undefined) {
@@ -53,15 +57,29 @@ router.route("/").post((req, res) => {
                         errorBool = true;
             });
             if (!errorBool)
+            {
                 elemento.save((error) => {
-                    if (error) res.send(msg.saveError + error);
+                    if (error)
+                    {
+                        res.send(msg.saveError + error);
+                        console.log("POST -> / ❌ - " + error);
+                    } 
+                    console.log("POST -> / ✅ - Bem-Vindo " + elemento.nickname);
                 });
+            }
+            else
+                console.log("POST -> / ❌ - " + msg.elementError);
         } else
+        {
             elemento.save((error) => {
                 if (error)
+                {
                     res.send("Erro ao tentar salvar o elemento....: " + error);
+                    console.log("POST -> / ❌ - " + error);
+                }
+                console.log("POST -> / ✅ - Bem-Vindo (" + elemento.nickname + ")");
             });
-        
+        }        
         //Render index + notificação
         const notificacao = new Notification(!errorBool);
         res.render("pages/index", {

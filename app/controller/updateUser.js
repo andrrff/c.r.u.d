@@ -10,34 +10,43 @@ const padrao = mongoose.model("Users", UserSchema);
 
 router
     .route("/data/:produto_id")
-
     .get((req, res) => {
         padrao.findById(req.params.produto_id, function (error, produto) {
             if (error) 
+            {
                 res.render("pages/error", {
                     title: msg.titleData,
                     subtitle: msg.titleData,
                     error: error,
                 });
+                console.log(
+                    "GET -> /data/" + req.params.produto_id + " ❌ - " + error
+                );
+            }
 
             res.render("pages/dataUnique", {
                 title: msg.titleData,
                 data: produto,
             });
+            console.log("GET -> /data/" + req.params.produto_id + " ✅");
         });
     })
 router.route("/data/:produto_id/view_raw").get((req, res) => {
     padrao.findById(req.params.produto_id, function (error, produto) {
         if (error)
+        {
             res.render("pages/error", {
                 title: msg.titleData,
                 subtitle: msg.titleData,
                 error: error,
             });
+            console.log("GET -> /data/" + req.params.produto_id + "/view_raw ❌ - " + error);
+        }
 
         res.send(produto, function (error) {
             console.log("Error : ", error);
         });
+        console.log("GET -> /data/" + req.params.produto_id + "/view_raw ✅");
     });
 });
 
@@ -46,44 +55,55 @@ router
     .get((req, res) => {
         padrao.find((error, _elementos) => {
             if (error)
+            {
                 res.render("pages/error", {
                     title: msg.titleData,
                     subtitle: msg.titleData,
                     error: error,
                 });
-
-
+                console.log("GET -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
+            }
+            console.log("GET -> /data/" + req.params.produto_id + "/mode_edit ✅");
         });
         padrao.findById(req.params.produto_id, function (error, elemento) {
             if (error)
+            {
                 res.render("pages/error", {
                     title: msg.titleData,
                     subtitle: msg.titleData,
                     error: error,
                 });
+            }
 
             res.render("pages/edit", {
-                title: "Data",
+                title: msg.titleData,
                 data: elemento,
             });
+            console.log("Você está modificando o usuário (" + elemento.nickname + ")");
         });
     })
     .put((req, res) => {
         padrao.find((error, elementos) => 
         {
             if (error)
+            {
                 res.render("pages/error", {
                     title: msg.titleData,
                     subtitle: msg.titleData,
                     error: error,
                 });
+                console.log("PUT -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
+            }
                 padrao.findById(req.params.produto_id, (error, elemento) => {
                     if (error)
+                    {
                         res.render("pages/error", {
                             title: msg.titleData,
                             subtitle: msg.titleData,
                             error: error,
                         });
+                        console.log("PUT -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
+                    }
                     //Guardamos o valor já presente no BD
                     const static_nickname = elemento.nickname;
                     var errorEqualsNick = false;
@@ -108,17 +128,23 @@ router
                                 errorEqualsNick = true;
                     });
                     if (errorEqualsNick)
+                    {
                         res.render("pages/error", {
                             title: msg.titleData,
                             subtitle: msg.titleData,
                             error: msg.elementError,
                         });
+                        console.log("PUT -> /data" + req.params.produto_id + "/mode_edit ❌ - " + msg.elementError);
+                    }
                     else
+                    {
                         elemento.save((_error) => {
                             res.render("pages/actionPage", {
                                 title: msg.edited,
                             });
                         });
+                        console.log("PUT -> /data" + req.params.produto_id + "/mode_edit ✅");
+                    }
                 });
         })
     });
