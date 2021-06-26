@@ -15,6 +15,12 @@ porta:
 localhost
 ```
 
+> Caso não funcionar pode ser porque você não tenha o Bunyan
+> [bunyan](https://www.npmjs.com/package/bunyan)
+```
+npm i -g bunyan
+```
+
 ____
 
 ## Regras
