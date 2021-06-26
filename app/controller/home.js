@@ -31,7 +31,7 @@ router.route("/").post((req, res) => {
         "/" +
         currentdate.getFullYear() +
         " - " +
-        currentdate.getHours() +
+        currentdate.getHours()+
         ":" +
         currentdate.getMinutes() +
         ":" +
