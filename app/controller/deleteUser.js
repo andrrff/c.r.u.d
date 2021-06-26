@@ -25,7 +25,6 @@ router
                 {
                     res.render("pages/error", {
                         title: msg.titleError,
-                        subtitle: msg.subtitleError,
                         error: error,
                     });
                     log.warn("DELETE -> /data/" + req.params.produto_id + " ❌ - " + error);

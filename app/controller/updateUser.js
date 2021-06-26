@@ -18,8 +18,7 @@ router
             {
                 res.render("pages/error", {
                     title: msg.titleData,
-                    subtitle: msg.titleData,
-                    error: error,
+                    error: error
                 });
                 log.warn(
                     "GET -> /data/" + req.params.produto_id + " ❌ - " + error
@@ -39,7 +38,6 @@ router.route("/data/:produto_id/view_raw").get((req, res) => {
         {
             res.render("pages/error", {
                 title: msg.titleData,
-                subtitle: msg.titleData,
                 error: error,
             });
             log.warn("GET -> /data/" + req.params.produto_id + "/view_raw ❌ - " + error);
@@ -60,7 +58,6 @@ router
             {
                 res.render("pages/error", {
                     title: msg.titleData,
-                    subtitle: msg.titleData,
                     error: error,
                 });
                 log.warn("GET -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
@@ -72,7 +69,6 @@ router
             {
                 res.render("pages/error", {
                     title: msg.titleData,
-                    subtitle: msg.titleData,
                     error: error,
                 });
             }
@@ -91,7 +87,6 @@ router
             {
                 res.render("pages/error", {
                     title: msg.titleData,
-                    subtitle: msg.titleData,
                     error: error,
                 });
                 log.warn("PUT -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
@@ -101,7 +96,6 @@ router
                     {
                         res.render("pages/error", {
                             title: msg.titleData,
-                            subtitle: msg.titleData,
                             error: error,
                         });
                         log.warn("PUT -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
@@ -133,7 +127,6 @@ router
                     {
                         res.render("pages/error", {
                             title: msg.titleData,
-                            subtitle: msg.titleData,
                             error: msg.elementError,
                         });
                         log.warn("PUT -> /data" + req.params.produto_id + "/mode_edit ❌ - " + msg.elementError);

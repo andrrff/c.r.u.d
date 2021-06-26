@@ -42,7 +42,6 @@ router.route("/").post((req, res) => {
         {
             res.render("pages/error", {
                 title: msg.titleError,
-                subtitle: msg.subtitleError,
                 error: error,
             });
             log.warn("POST -> / ❌ - " + error);

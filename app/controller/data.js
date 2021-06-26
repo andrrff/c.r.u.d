@@ -40,7 +40,6 @@ router
             if (error)
                 res.render("pages/error", {
                     title: msg.titleData,
-                    subtitle: msg.titleData,
                     error: error,
                 });
 
