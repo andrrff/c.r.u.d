@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 const methodOverride = require("method-override");
 const express = require('express');
+const bunyan = require("bunyan");
 const app = express();
+var log = bunyan.createLogger({ name: "crud" });
+log.info('start')
+
 
 //Cluster usado
 mongoose.connect(
@@ -13,7 +17,7 @@ mongoose.connect(
 const connection = mongoose.connection;
 
 connection.once("open", function () {
-    console.log("MongoDB database conexão estabelecida com sucesso!");
+    log.info("MongoDB database conexão estabelecida com sucesso!");
 });
 
 //Iniciando a aplicacao
@@ -34,5 +38,5 @@ var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
 var server_host = process.env.YOUR_HOST || "0.0.0.0";
 
 app.listen(server_port, server_host, function () {
-    console.log("Listening on port %d", server_port);
+    log.info("Listening on port %d", server_port);
 });

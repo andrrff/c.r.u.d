@@ -1,7 +1,9 @@
 var express = require("express");
 const mongoose = require("mongoose");
+const bunyan = require("bunyan");
 mongoose.Promise = global.Promise;
 var router = express.Router();
+var log = bunyan.createLogger({ name: "crud" });
 
 const UserSchema = require("../models/user");
 const Notification = require("../public/js/notification");
@@ -18,7 +20,7 @@ router.get("/", (_req, res) => {
         subtitle: msg.subtitleForms,
         notificacao: "",
     });
-    console.log("GET -> / ✅");
+    log.info("GET -> / ✅");
 });
 
 router.route("/").post((req, res) => {
@@ -43,7 +45,7 @@ router.route("/").post((req, res) => {
                 subtitle: msg.subtitleError,
                 error: error,
             });
-            console.log("POST -> / ❌ - " + error);
+            log.warn("POST -> / ❌ - " + error);
         }
 
         // Verificando se a collection existe
@@ -62,22 +64,22 @@ router.route("/").post((req, res) => {
                     if (error)
                     {
                         res.send(msg.saveError + error);
-                        console.log("POST -> / ❌ - " + error);
+                        log.warn("POST -> / ❌ - " + error);
                     } 
-                    console.log("POST -> / ✅ - Bem-Vindo " + elemento.nickname);
+                    log.info("POST -> / ✅ - Bem-Vindo " + elemento.nickname);
                 });
             }
             else
-                console.log("POST -> / ❌ - " + msg.elementError);
+                log.warn("POST -> / ❌ - " + msg.elementError);
         } else
         {
             elemento.save((error) => {
                 if (error)
                 {
                     res.send("Erro ao tentar salvar o elemento....: " + error);
-                    console.log("POST -> / ❌ - " + error);
+                    log.warn("POST -> / ❌ - " + error);
                 }
-                console.log("POST -> / ✅ - Bem-Vindo (" + elemento.nickname + ")");
+                log.info("POST -> / ✅ - Bem-Vindo (" + elemento.nickname + ")");
             });
         }        
         //Render index + notificação

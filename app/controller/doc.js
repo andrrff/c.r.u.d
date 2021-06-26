@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bunyan = require("bunyan");
 mongoose.Promise = global.Promise;
 const Msg = require("../public/js/msg");
 const Notification = require("../public/js/notification");
+var log = bunyan.createLogger({ name: "crud" });
 
 const msg = new Msg();
 const notificacao = new Notification(true);
@@ -15,7 +17,7 @@ router.route("/").get((_req, res) => {
         subtitle: msg.sutitleDoc,
         notificacao: notificacao,
     });
-    console.log("GET -> /doc ✅");
+    log.info("GET -> /doc ✅");
 });
 
 module.exports = router;

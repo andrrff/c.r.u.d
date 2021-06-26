@@ -1,9 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bunyan = require("bunyan");
 mongoose.Promise = global.Promise;
 var router = express.Router();
 const Msg = require("../public/js/msg");
 const UserSchema = require("../models/user");
+var log = bunyan.createLogger({ name: "crud" });
 
 const msg = new Msg();
 const padrao = mongoose.model("Users", UserSchema);
@@ -19,7 +21,7 @@ router
                     subtitle: msg.titleData,
                     error: error,
                 });
-                console.log(
+                log.warn(
                     "GET -> /data/" + req.params.produto_id + " ❌ - " + error
                 );
             }
@@ -28,7 +30,7 @@ router
                 title: msg.titleData,
                 data: produto,
             });
-            console.log("GET -> /data/" + req.params.produto_id + " ✅");
+            log.info("GET -> /data/" + req.params.produto_id + " ✅");
         });
     })
 router.route("/data/:produto_id/view_raw").get((req, res) => {
@@ -40,13 +42,13 @@ router.route("/data/:produto_id/view_raw").get((req, res) => {
                 subtitle: msg.titleData,
                 error: error,
             });
-            console.log("GET -> /data/" + req.params.produto_id + "/view_raw ❌ - " + error);
+            log.warn("GET -> /data/" + req.params.produto_id + "/view_raw ❌ - " + error);
         }
 
         res.send(produto, function (error) {
-            console.log("Error : ", error);
+            log.warn("Error : ", error);
         });
-        console.log("GET -> /data/" + req.params.produto_id + "/view_raw ✅");
+        log.info("GET -> /data/" + req.params.produto_id + "/view_raw ✅");
     });
 });
 
@@ -61,9 +63,9 @@ router
                     subtitle: msg.titleData,
                     error: error,
                 });
-                console.log("GET -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
+                log.warn("GET -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
             }
-            console.log("GET -> /data/" + req.params.produto_id + "/mode_edit ✅");
+            log.info("GET -> /data/" + req.params.produto_id + "/mode_edit ✅");
         });
         padrao.findById(req.params.produto_id, function (error, elemento) {
             if (error)
@@ -79,7 +81,7 @@ router
                 title: msg.titleData,
                 data: elemento,
             });
-            console.log("Você está modificando o usuário (" + elemento.nickname + ")");
+            log.info("Você está modificando o usuário (" + elemento.nickname + ")");
         });
     })
     .put((req, res) => {
@@ -92,7 +94,7 @@ router
                     subtitle: msg.titleData,
                     error: error,
                 });
-                console.log("PUT -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
+                log.warn("PUT -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
             }
                 padrao.findById(req.params.produto_id, (error, elemento) => {
                     if (error)
@@ -102,7 +104,7 @@ router
                             subtitle: msg.titleData,
                             error: error,
                         });
-                        console.log("PUT -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
+                        log.warn("PUT -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
                     }
                     //Guardamos o valor já presente no BD
                     const static_nickname = elemento.nickname;
@@ -134,7 +136,7 @@ router
                             subtitle: msg.titleData,
                             error: msg.elementError,
                         });
-                        console.log("PUT -> /data" + req.params.produto_id + "/mode_edit ❌ - " + msg.elementError);
+                        log.warn("PUT -> /data" + req.params.produto_id + "/mode_edit ❌ - " + msg.elementError);
                     }
                     else
                     {
@@ -143,7 +145,7 @@ router
                                 title: msg.edited,
                             });
                         });
-                        console.log("PUT -> /data" + req.params.produto_id + "/mode_edit ✅");
+                        log.info("PUT -> /data" + req.params.produto_id + "/mode_edit ✅");
                     }
                 });
         })

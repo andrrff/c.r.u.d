@@ -1,9 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bunyan = require("bunyan");
 mongoose.Promise = global.Promise;
 const UserSchema = require("../models/user");
 const padrao = mongoose.model("Users", UserSchema);
 const Msg = require("../public/js/msg");
+var log = bunyan.createLogger({ name: "crud" });
 
 const msg = new Msg();
 
@@ -26,12 +28,12 @@ router
                         subtitle: msg.subtitleError,
                         error: error,
                     });
-                    console.log("DELETE -> /data/" + req.params.produto_id + " ❌ - " + error);
+                    log.warn("DELETE -> /data/" + req.params.produto_id + " ❌ - " + error);
                 }
                 
                 router.route("/");
                 res.render("pages/actionPage", { title: msg.deleted });
-                console.log("DELETE -> /data/" + req.params.produto_id + " ✅");
+                log.info("DELETE -> /data/" + req.params.produto_id + " ✅");
             }
         );
     });

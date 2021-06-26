@@ -4,13 +4,15 @@
     "description": "Uma aplicação usando API RESTful + Node + MongoDB + Express",
     "main": "./app.js",
     "scripts": {
-        "start": "nodemon -e css,ejs,js,json --watch app"
+        "start": "nodemon -e css,ejs,js,json --watch app | bunyan",
+        "server": "gulp server "
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/andrrff/c.r.u.d"
     },
     "dependencies": {
+        "bunyan": "^1.8.15",
         "ejs": "^2.5.5",
         "express": "5.0.0-alpha.8",
         "method-override": "^3.0.0",

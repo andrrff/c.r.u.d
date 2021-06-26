@@ -1,9 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bunyan = require("bunyan");
 mongoose.Promise = global.Promise;
 var router = express.Router();
 const Msg = require("../public/js/msg");
 const UserSchema = require("../models/user");
+var log = bunyan.createLogger({ name: "crud" });
 
 const msg = new Msg();
 const padrao = mongoose.model("User", UserSchema);
@@ -19,7 +21,7 @@ router
                     subtitle: msg.titleData,
                     error: error,
                 });
-                console.log("GET -> /data ❌ " + error)
+                log.warn("GET -> /data ❌ " + error)
             }
             res.render("pages/data", {
                 title: msg.titleData,
@@ -27,7 +29,7 @@ router
                     "__________________________________________________________________",
                 data: elementos,
             });
-            console.log("GET -> /data ✅");
+            log.info("GET -> /data ✅");
         });
     });
 
@@ -47,7 +49,7 @@ router
                 nicknameResult: req.query.nickname,
                 data: elementos,
             });
-            console.log("GET -> /data/search?nickname=" + req.query.nickname + " ✅");
+            log.info("GET -> /data/search?nickname=" + req.query.nickname + " ✅");
         });
     });
 
