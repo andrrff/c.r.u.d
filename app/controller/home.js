@@ -35,7 +35,8 @@ router.route("/").post((req, res) => {
         ":" +
         currentdate.getMinutes() +
         ":" +
-        currentdate.getSeconds();
+        currentdate.getSeconds() +
+        " GMT - (00:00)";
 
     elemento.firstname = req.body.firstname;
     elemento.lastname = req.body.lastname;
