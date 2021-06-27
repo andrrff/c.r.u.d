@@ -38,14 +38,14 @@ ____
 
 ## Métodos
 
-- ### Cadastro(register user)
+- ### Cadastro(create user)
 
 | Method     | URI                               | File                         | View                      |
 |------------|-----------------------------------|------------------------------|---------------------------|
 | `GET`      | `/`                               | [`app\controller\home.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/home.js#L16)     | [`views/pages/index.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/index.ejs)   |
 | `POST`     | `/`                               | [`app\controller\home.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/home.js#L25)     | [`views/pages/index.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/index.ejs)   |
 
-- ### Data(get users)
+- ### Data(read users)
 
 | Method     | URI                               | File                         | View                      |
 |------------|-----------------------------------|------------------------------|---------------------------|
