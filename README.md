@@ -119,4 +119,17 @@ ____
 
 ____
 
+## Ferramentas usadas:
+  - [method-override](https://www.npmjs.com/package/method-override)
+  - [Mongoose](https://mongoosejs.com/docs/guide.html)
+  - [MongoDB](https://docs.mongodb.com)
+  - [nodemon](https://nodemon.io)
+  - [Expressjs](https://expressjs.com/en/guide/routing.html)
+  - [request](https://www.npmjs.com/package/request)
+  - [bunyan](https://www.npmjs.com/package/bunyan)
+  - [Heroku](https://circleci.com/docs/?utm_source=google&utm_medium=cpc&utm_content=docs&utm_campaign=sitelinkDocs&gclid=Cj0KCQjw2tCGBhCLARIsABJGmZ7Q9doxkThadrBOGJD7FARqVgGL5D-C-deNRsJOGjqMYkhsEQ9cKmAaAhP0EALw_wcB)
+  - [ejs](https://ejs.co/#docs)
+  
+____
+
 ## [Livedemo](https://crud-andrrff.herokuapp.com/)
