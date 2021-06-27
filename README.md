@@ -6,7 +6,7 @@
 
 ____
 
-## Comando
+## Comandos
 ```
 npm start
 ```
