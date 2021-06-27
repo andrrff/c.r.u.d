@@ -9,7 +9,6 @@ const UserSchema = require("../models/user");
 const Notification = require("../public/js/notification");
 const Msg = require("../public/js/msg");
 
-const notificacao = new Notification(true);
 const msg = new Msg();
 const padrao = mongoose.model("User", UserSchema);
 

@@ -53,7 +53,7 @@ router.route("/data/:produto_id/view_raw").get((req, res) => {
 router
     .route("/data/:produto_id/mode_edit")
     .get((req, res) => {
-        padrao.find((error, _elementos) => {
+        padrao.findById(req.params.produto_id, function (error, elemento) {
             if (error)
             {
                 res.render("pages/error", {
@@ -62,21 +62,12 @@ router
                 });
                 log.warn("GET -> /data/" + req.params.produto_id + "/mode_edit ❌ - " + error);
             }
-            log.info("GET -> /data/" + req.params.produto_id + "/mode_edit ✅");
-        });
-        padrao.findById(req.params.produto_id, function (error, elemento) {
-            if (error)
-            {
-                res.render("pages/error", {
-                    title: msg.titleData,
-                    error: error,
-                });
-            }
 
             res.render("pages/edit", {
                 title: msg.titleData,
                 data: elemento,
             });
+            log.info("GET -> /data/" + req.params.produto_id + "/mode_edit ✅");
             log.info("Você está modificando o usuário (" + elemento.nickname + ")");
         });
     })
