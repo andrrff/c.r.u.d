@@ -52,6 +52,7 @@ router.route("/data/:produto_id/view_raw").get((req, res) => {
 
 router
     .route("/data/:produto_id/mode_edit")
+    //Levará os dados ja existentes no `edit.ejs`, para auxiliar na hora de editar
     .get((req, res) => {
         padrao.findById(req.params.produto_id, function (error, elemento) {
             if (error)
