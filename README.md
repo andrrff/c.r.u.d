@@ -23,6 +23,50 @@ npm i -g bunyan
 
 ____
 
+## Dados
+- `id`: Numero de indentificação único(gerado auto);
+- `firstName`: _String_ referenciando o primeiro nome;
+- `lastName`: _String_ referenciando o segundo/último nome;
+- `nickname`: _String_ de identificação único à escolha do usuário;
+- `address`: _String_ referenciando o endereço;
+- `bio`: Uma breve descrição sobre o usuário em _String_;
+- `dataLancamento`: Data da criação, no tipo padrão _Date_;
+- `dataUltima`: Data da ultima modificação, no tipo padrão _Date_;
+____
+
+## Metodos
+
+### - Cadastro(register user)
+
+| Method     | URI                               | File                         | View                      |
+|------------|-----------------------------------|------------------------------|---------------------------|
+| `GET`      | `/`                               | `app\controller\home.js`     | `views/pages/index.ejs`   |
+| `POST`     | `/`                               | `app\controller\home.js`     | `views/pages/index.ejs`   |
+
+### - Data(get users)
+
+| Method     | URI                               | File                         | View                      |
+|------------|-----------------------------------|------------------------------|---------------------------|
+| `GET/HEAD` | `/data`                           | `app\controller\data.js`     | `views/pages/data.ejs`    |
+| `GET/HEAD` | `/data/search?:nickname`          | `app\controller\data.js`     | `views/pages/data.ejs`    |
+
+### - Editar Usuário(update user)
+
+| Method     | URI                               | File                         | View                      |
+|------------|-----------------------------------|------------------------------|---------------------------|
+| `GET/HEAD` | `/data/:user_id`               | `app\controller\updateUser.js`| `views/pages/dataUnique.ejs`|
+| `GET/HEAD` | `/data/:user_id/view_raw`      | `app\controller\updateUser.js`| `resource.send(user.json)`  |
+| `GET/HEAD` | `/data/:user_id/mode_edit`     | `app\controller\updateUser.js`| `views/pages/edit.ejs`      |
+| `PUT`      | `/data/:user_id/mode_edit`     | `app\controller\updateUser.js`| `views/pages/edit.ejs`      |
+
+### - Delete Usuário(delete user)
+
+| Method     | URI                               | File                         | View                      |
+|------------|-----------------------------------|------------------------------|---------------------------|
+| `DELETE`   | `/data/:user_id`               | `app\controller\updateUser.js`| `views/pages/dataUnique.ejs`|
+
+____
+
 ## Regras
 - Somente UM nickname pode existir
 - O nickname deve ter no máximo 30 caracteres
