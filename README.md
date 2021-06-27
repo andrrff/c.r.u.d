@@ -57,7 +57,7 @@ ____
 | Method     | URI                               | File                         | View                      |
 |------------|-----------------------------------|------------------------------|---------------------------|
 | `GET/HEAD` | `/data/:user_id`               | [`app\controller\updateUser.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/updateUser.js#L15)| [`views/pages/dataUnique.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/dataUnique.ejs)|
-| `GET/HEAD` | `/data/:user_id/view_raw`      | [`app\controller\updateUser.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/updateUser.js#L35)| [`resource.send(user.json)`]  |
+| `GET/HEAD` | `/data/:user_id/view_raw`      | [`app\controller\updateUser.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/updateUser.js#L35)| [`resource.send(user.json)`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/updateUser.js#L46)  |
 | `GET/HEAD` | `/data/:user_id/mode_edit`     | [`app\controller\updateUser.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/updateUser.js#L56)| [`views/pages/edit.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/edit.ejs)      |
 | `PUT`      | `/data/:user_id/mode_edit`     | [`app\controller\updateUser.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/updateUser.js#L75)| [`views/pages/actionPage.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/actionPage.ejs)      |
 
