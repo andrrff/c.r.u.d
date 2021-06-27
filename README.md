@@ -23,8 +23,8 @@ npm i -g bunyan
 
 ____
 
-## Dados
-- `id`: Numero de indentificação único(gerado auto);
+## Modelo
+- `id`: Numero de indentificação único(gerado auto pelo MongoBD Atlas);
 - `firstName`: _String_ referenciando o primeiro nome;
 - `lastName`: _String_ referenciando o segundo/último nome;
 - `nickname`: _String_ de identificação único à escolha do usuário;
@@ -32,38 +32,40 @@ ____
 - `bio`: Uma breve descrição sobre o usuário em _String_;
 - `dataLancamento`: Data da criação, no tipo padrão _Date_;
 - `dataUltima`: Data da ultima modificação, no tipo padrão _Date_;
+
+[mais sobre...](https://github.com/andrrff/c.r.u.d/blob/master/app/models/user.js)
 ____
 
-## Metodos
+## Métodos
 
-### - Cadastro(register user)
-
-| Method     | URI                               | File                         | View                      |
-|------------|-----------------------------------|------------------------------|---------------------------|
-| `GET`      | `/`                               | `app\controller\home.js`     | `views/pages/index.ejs`   |
-| `POST`     | `/`                               | `app\controller\home.js`     | `views/pages/index.ejs`   |
-
-### - Data(get users)
+- ### Cadastro(register user)
 
 | Method     | URI                               | File                         | View                      |
 |------------|-----------------------------------|------------------------------|---------------------------|
-| `GET/HEAD` | `/data`                           | `app\controller\data.js`     | `views/pages/data.ejs`    |
-| `GET/HEAD` | `/data/search?:nickname`          | `app\controller\data.js`     | `views/pages/data.ejs`    |
+| `GET`      | `/`                               | [`app\controller\home.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/home.js#L16)     | [`views/pages/index.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/index.ejs)   |
+| `POST`     | `/`                               | [`app\controller\home.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/home.js#L25)     | [`views/pages/index.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/index.ejs)   |
 
-### - Editar Usuário(update user)
-
-| Method     | URI                               | File                         | View                      |
-|------------|-----------------------------------|------------------------------|---------------------------|
-| `GET/HEAD` | `/data/:user_id`               | `app\controller\updateUser.js`| `views/pages/dataUnique.ejs`|
-| `GET/HEAD` | `/data/:user_id/view_raw`      | `app\controller\updateUser.js`| `resource.send(user.json)`  |
-| `GET/HEAD` | `/data/:user_id/mode_edit`     | `app\controller\updateUser.js`| `views/pages/edit.ejs`      |
-| `PUT`      | `/data/:user_id/mode_edit`     | `app\controller\updateUser.js`| `views/pages/edit.ejs`      |
-
-### - Delete Usuário(delete user)
+- ### Data(get users)
 
 | Method     | URI                               | File                         | View                      |
 |------------|-----------------------------------|------------------------------|---------------------------|
-| `DELETE`   | `/data/:user_id`               | `app\controller\updateUser.js`| `views/pages/dataUnique.ejs`|
+| `GET/HEAD` | `/data`                           | [`app\controller\data.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/data.js#L15)     | [`views/pages/data.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/data.ejs)    |
+| `GET/HEAD` | `/data/search?:nickname`          | [`app\controller\data.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/data.js#L38)     | [`views/pages/data.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/data.ejs)    |
+
+- ### Editar Usuário(update user)
+
+| Method     | URI                               | File                         | View                      |
+|------------|-----------------------------------|------------------------------|---------------------------|
+| `GET/HEAD` | `/data/:user_id`               | [`app\controller\updateUser.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/updateUser.js#L15)| [`views/pages/dataUnique.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/dataUnique.ejs)|
+| `GET/HEAD` | `/data/:user_id/view_raw`      | [`app\controller\updateUser.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/updateUser.js#L35)| [`resource.send(user.json)`]  |
+| `GET/HEAD` | `/data/:user_id/mode_edit`     | [`app\controller\updateUser.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/updateUser.js#L56)| [`views/pages/edit.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/edit.ejs)      |
+| `PUT`      | `/data/:user_id/mode_edit`     | [`app\controller\updateUser.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/updateUser.js#L75)| [`views/pages/actionPage.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/actionPage.ejs)      |
+
+- ### Delete Usuário(delete user)
+
+| Method     | URI                               | File                         | View                      |
+|------------|-----------------------------------|------------------------------|---------------------------|
+| `DELETE`   | `/data/:user_id`               | [`app\controller\deleteUser.js`](https://github.com/andrrff/c.r.u.d/blob/master/app/controller/deleteUser.js#L17)| [`views/pages/actionPage.ejs`](https://github.com/andrrff/c.r.u.d/blob/master/app/views/pages/actionPage.ejs)|
 
 ____
 
@@ -86,7 +88,7 @@ Este arquivo é o responsável pela pagina inicial da aplicação, a sua princip
 #### `app/controller/data.js`
 Depois que temos um usuário registrado, os dados dentro do MongoDB, são extraídos usando o método `GET`(a interação com o MongoDB é feita com o Mongoose), este arquivo é o responsável pelo redirecionamento para rota de um ID específico, saíndo do arquivo `data.ejs` para o `dataUnique.ejs`, sem contar a caixa de pesquisa, em que usa-se o query.
 
-### `app/controller/doc.js`
+#### `app/controller/doc.js`
 Bom... Você já deve desconfiar o que ela faz, usando o metodo `GET` mas apenas para um pequeno render, por que como nós usamos páginas modularizadas, temos que está destribuindo "props" para elas terem valores e preencherem os itens, como por exemplo a palavra "Documentação", ela é um `< % = title % > `, mas que dentro do arquivo doc recebe uma valor para ser retornada no arquivo ".ejs", este conceito se aplica à todos os outrs itens sitados anteriormente.
 
 #### `app/controller/deleteUser.js` && `app/controller/updateUser.js`
