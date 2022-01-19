@@ -11,6 +11,7 @@
         "url": "https://github.com/andrrff/c.r.u.d"
     },
     "dependencies": {
+        "body-parser": "^1.19.1",
         "bunyan": "^1.8.15",
         "ejs": "^2.5.5",
         "express": "5.0.0-alpha.8",

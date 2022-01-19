@@ -13,12 +13,12 @@ const router = express.Router();
 
 
 router
-    .route("/data/:produto_id")
+    .route("/data/:user_id")
     .delete((req, res) => {
         // Removendo por parametro no caso o ID
         padrao.deleteOne(
             {
-                _id: req.params.produto_id,
+                _id: req.params.user_id,
             },
             (error) => {
                 if (error)
@@ -27,12 +27,12 @@ router
                         title: msg.titleError,
                         error: error,
                     });
-                    log.warn("DELETE -> /data/" + req.params.produto_id + " ❌ - " + error);
+                    log.warn("DELETE -> /data/" + req.params.user_id + " ❌ - " + error);
                 }
                 
                 router.route("/");
                 res.render("pages/actionPage", { title: msg.deleted });
-                log.info("DELETE -> /data/" + req.params.produto_id + " ✅");
+                log.info("DELETE -> /data/" + req.params.user_id + " ✅");
             }
         );
     });
