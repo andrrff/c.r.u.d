@@ -224,7 +224,7 @@ router.route("/update").put(bodyParser, (req, res) => {
         })
     });
 
-router.route("/data_raw").get((req, res) => {
+router.route("/data/view_raw").get((req, res) => {
     padrao.find((error, elementos) => {
         if (error) {
             res.render("pages/error", {
