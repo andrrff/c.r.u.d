@@ -157,6 +157,7 @@ router.route("/post").post(bodyParser, (req, res) => {
 });
 
 router.route("/update").put(bodyParser, (req, res) => {
+    var isElegible = false;
         padrao.find((error, elementos) => 
         {
             if (error)
@@ -169,7 +170,7 @@ router.route("/update").put(bodyParser, (req, res) => {
             }
                 padrao.findById(req.body._id, (error, elemento) => {
                     if (error) {
-                        res.render("pages/error", {
+                        res.send("pages/error", {
                             title: msg.titleData,
                             error: error,
                         });
@@ -182,7 +183,6 @@ router.route("/update").put(bodyParser, (req, res) => {
                     }
                     //Guardamos o valor já presente no BD
                     const static_nickname = elemento.nickname;
-                    var isElegible = false;
                     //Poderiamos usar este valor `new Date().toDateString() + " | " + new Date().toTimeString()`
                     // que é mais legivel para o usuario, mas eu optei por não mudar o padrão do schema
                     var currentdate = new Date();
@@ -204,7 +204,7 @@ router.route("/update").put(bodyParser, (req, res) => {
                             isElegible = true;
                     });
                     if (isElegible) {
-                        res.render("pages/error", {
+                        res.send("pages/error", {
                             title: msg.titleData,
                             error: msg.elementError,
                         });
@@ -216,9 +216,7 @@ router.route("/update").put(bodyParser, (req, res) => {
                         );
                     } else {
                         elemento.save((_error) => {
-                            res.render("pages/actionPage", {
-                                title: msg.edited,
-                            });
+                            res.send(msg.edited);
                         });
                         log.warn("PUT -> /update (id:" + req.body._id + ") ✅");
                     }
