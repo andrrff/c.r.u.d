@@ -129,19 +129,19 @@ router.route("/post").post(bodyParser, (req, res) => {
                 elemento.save((error) => {
                     if (error) {
                         res.send(msg.saveError + error);
-                        log.warn("POST -> / ❌ - " + error);
+                        log.warn("POST -> /post ❌ - " + error);
                     }
-                    log.info("POST -> / ✅ - Bem-Vindo " + elemento.nickname);
+                    log.info("POST -> /post ✅ - Bem-Vindo " + elemento.nickname);
                 });
-            } else log.warn("POST -> / ❌ - " + msg.elementError);
+            } else log.warn("POST -> /post ❌ - " + msg.elementError);
         } else {
             elemento.save((error) => {
                 if (error) {
                     res.send("Erro ao tentar salvar o elemento....: " + error);
-                    log.warn("POST -> / ❌ - " + error);
+                    log.warn("POST -> /post ❌ - " + error);
                 }
                 log.info(
-                    "POST -> / ✅ - Bem-Vindo (" + elemento.nickname + ")"
+                    "POST -> /post ✅ - Bem-Vindo (" + elemento.nickname + ")"
                 );
             });
         }
@@ -223,5 +223,18 @@ router.route("/update").put(bodyParser, (req, res) => {
                 });
         })
     });
+
+router.route("/data_raw").get((req, res) => {
+    padrao.find((error, elementos) => {
+        if (error) {
+            res.render("pages/error", {
+                title: msg.titleError,
+                error: error,
+            });
+            log.warn("GET -> /data_raw ❌ - " + error);
+        }
+        res.send(elementos)
+    });
+});
 
 module.exports = router;
