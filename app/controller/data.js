@@ -1,14 +1,14 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bunyan = require("bunyan");
-mongoose.Promise = global.Promise;
-var router = express.Router();
-const Msg = require("../public/js/msg");
-const UserSchema = require("../models/user");
-var log = bunyan.createLogger({ name: "crud" });
+const UserSchema    = require("../models/user");
+const express       = require("express");
+const mongoose      = require("mongoose");
+const bunyan        = require("bunyan");
+const Msg           = require("../public/js/msg");
+var router          = express.Router();
+var log             = bunyan.createLogger({ name: "crud" });
+mongoose.Promise    = global.Promise;
 
-const msg = new Msg();
-const padrao = mongoose.model("User", UserSchema);
+const msg       = new Msg();
+const padrao    = mongoose.model("User", UserSchema);
 
 router
     .route("/")
