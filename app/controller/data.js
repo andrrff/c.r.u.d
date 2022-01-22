@@ -26,7 +26,7 @@ router
             res.render("pages/data", {
                 title: msg.titleData,
                 nicknameResult:
-                    "__________________________________________________________________",
+                    "",
                 data: elementos,
             });
             log.info("GET -> /data ✅");

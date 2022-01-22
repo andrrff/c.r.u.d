@@ -13,17 +13,12 @@
     <div class="jumbotron">
           <form class="d-flex" action="/data/search?" method="GET">
                 <div class="input-group mb-3">
-                    <input type="username" class="form-control" name="nickname" placeholder="Pesquise por nickname" aria-label="Recipient's username" aria-describedby="button-addon2" >
+                    <input type="username" class="form-control" name="nickname" placeholder="Pesquise por nickname" value="<%= nicknameResult %>" aria-label="Recipient's username" aria-describedby="button-addon2" >
                     <input class="btn btn-outline-primary"  type="submit" id="button-addon2">
                 </div>
             </form>
-            <!-- <div class="input-group mb-3">
-                <button class="btn btn-outline-primary"  type="button" id="button-addon2">All</button>
-                <button class="btn btn-outline-primary"  type="button" id="button-addon2">Nomes</button>
-                <button class="btn btn-outline-primary"  type="button" id="button-addon2">Nickname</button>
-            </div> -->
         <% data.forEach(function(index){ %>
-            <% if(nicknameResult == index.nickname || nicknameResult == "__________________________________________________________________"){ %>
+            <% if(nicknameResult.toLowerCase() == index.nickname.toLowerCase() || nicknameResult.length == 0){ %>
                 <div class="list-group" style='margin-bottom: 5pc;'>
                     <button onclick="window.location.href='/data/<%= index.id %>'" type="button" class="list-group-item list-group-item-action active" aria-current="true">
                         /data/<%= index.id %>
