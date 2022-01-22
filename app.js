@@ -21,7 +21,7 @@ connection.once("open", function () {
 });
 
 //Iniciando a aplicacao
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set("views", "./app/views");
 app.set("view engine", "ejs");
